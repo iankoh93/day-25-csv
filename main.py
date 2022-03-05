@@ -45,13 +45,15 @@ while game_is_running:
 
 print(correct_guesses)
 print(f"Your final score is {score}")
-missed_states = []
 
+missed_states = []
 for state in data.state:
     if state not in correct_guesses:
         location = data[data.state == state]
         missed_states.append(state)
         write_state(name_state=state, x=int(location.x), y=int(location.y))
+
+# missed_states = [state for state in data.state if state not in correct_guesses]
 
 missed_states_data = pandas.DataFrame(missed_states)
 missed_states_data.to_csv("states_to_learn.csv")
